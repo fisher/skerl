@@ -15,12 +15,13 @@
 -endif.
 
 init() ->
-    case code:priv_dir(skerl) of
-        {error, bad_name} ->
-            SoName = filename:join("../priv", "skerl_nifs");
-        Dir ->
-            SoName = filename:join(Dir, "skerl_nifs")
-    end,
+    SoName =
+        case code:priv_dir(skerl) of
+            {error, bad_name} ->
+                filename:join("../priv", "skerl_nifs");
+            Dir ->
+                filename:join(Dir, "skerl_nifs")
+        end,
     erlang:load_nif(SoName, 0).
 
 init(_Bits) ->
