@@ -18,9 +18,9 @@ init() ->
     SoName =
         case code:priv_dir(skerl) of
             {error, bad_name} ->
-                filename:join("../priv", "skerl_nifs");
+                filename:join("../priv", "skerl");
             Dir ->
-                filename:join(Dir, "skerl_nifs")
+                filename:join(Dir, "skerl")
         end,
     erlang:load_nif(SoName, 0).
 
