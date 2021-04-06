@@ -1,4 +1,7 @@
-c_src/*.o
+/c_src/*.o
 .eunit
-ebin/*.beam
-priv/*.so
+/ebin/
+/obj
+/priv/*.so
+erl_crash.dump
+
