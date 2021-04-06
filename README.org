@@ -19,6 +19,13 @@ cd path/to/skerl/ebin
 erl
 #+END_SRC
 
+   Alternatively, add the path to compiled .beams and .app to ~-pa~ option:
+
+#+BEGIN_SRC shell
+cd whatever/your/project/is
+erl -pa path/to/skerl/ebin
+#+END_SRC
+
    Hash a binary by calling =skerl:hash/2= with the desired number of
    bits for the resulting hash:
 
@@ -87,6 +94,8 @@ git checkout -b some-topic-branch
 #+BEGIN_SRC shell
 git push mine some-topic-branch
 #+END_SRC
-   6) A Basho engineer or community maintainer will review your patch
+   6) A Basho engineer[fn:1] or community maintainer will review your patch
       and merge it into the main repository or send you feedback.
 
+-----
+[fn:1] Oopsie, there are no any basho engineers left and no basho company anymore

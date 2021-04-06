@@ -33,7 +33,8 @@ update(_State, _Data) ->
 final(_State) ->
     "NIF library not loaded".
     
-hexhash(Bits, Data) ->
+hexhash(Bits, Data)
+  when is_integer(Bits) andalso is_binary(Data) ->
   {ok, Hash} = hash(Bits, Data),
   list_to_binary(hex:bin_to_hexstr(Hash)).
 
