@@ -8,7 +8,7 @@
 ** Source code author: Doug Whiting, 2008.
 **
 ** This algorithm and source code is released to the public domain.
-** 
+**
 ************************************************************************/
 
 #include "skein.h"
@@ -43,7 +43,7 @@ HashReturn Update(hashState *state, const BitSequence *data, DataLength databitl
 HashReturn Final (hashState *state,       BitSequence *hashval);
 
 /* "all-in-one" call */
-HashReturn Hash  (int hashbitlen,   const BitSequence *data, 
+HashReturn Hash  (int hashbitlen,   const BitSequence *data,
                   DataLength databitlen,  BitSequence *hashval);
 
 

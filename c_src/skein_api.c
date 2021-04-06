@@ -5,7 +5,7 @@
 ** Source code author: Doug Whiting, 2008.
 **
 ** This algorithm and source code is released to the public domain.
-** 
+**
 ************************************************************************/
 
 #include <string.h>     /* get the memcpy/memset functions */
@@ -78,7 +78,7 @@ HashReturn Update(hashState *state, const BitSequence *data, DataLength databitl
             default: return FAIL;
             }
         Skein_Set_Bit_Pad_Flag(state->u.h);                    /* set tweak flag for the final call */
-        
+
         return SUCCESS;
         }
     }
