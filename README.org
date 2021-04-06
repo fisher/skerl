@@ -94,8 +94,8 @@ git checkout -b some-topic-branch
 #+BEGIN_SRC shell
 git push mine some-topic-branch
 #+END_SRC
-   6) A Basho engineer[fn:1] or community maintainer will review your patch
+   1) A Basho engineer^{1} or community maintainer will review your patch
       and merge it into the main repository or send you feedback.
 
 -----
-[fn:1] Oopsie, there are no any basho engineers left and no basho company anymore
+.^{1} Oopsie, there are no any basho engineers left and no basho company anymore

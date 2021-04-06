@@ -2,6 +2,11 @@
 
 -include_lib("eunit/include/eunit.hrl").
 
+-export([start/0]).
+
+start() ->
+    ok.
+
 eight_bit_input_test() ->
   ?assertEqual(
     {ok, hex:hexstr_to_bin("42AA6BD9CA92E90EA28DF6F6F" ++
