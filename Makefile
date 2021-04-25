@@ -19,7 +19,7 @@ ERL_FLAGS := $(EXTRA_OPTS) \
 ERL_LIBS := ${ERL_LIBS}:~/lib/erl
 
 ERTS_CACHE := erts_include
-ERTS_INC := $(shell cat $(ERTS_CACHE))
+ERTS_INC := $(shell cat $(ERTS_CACHE) 2>/dev/null)
 
 ifndef ERTS_INC
 # Find the actual ERTS location to include erl_nif.h
