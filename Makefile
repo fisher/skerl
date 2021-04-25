@@ -18,13 +18,17 @@ ERL_FLAGS := $(EXTRA_OPTS) \
 
 ERL_LIBS := ${ERL_LIBS}:~/lib/erl
 
-## If it differs from default search path like /usr/include
-ERTS_INC := -I/home/fisher/.asdf/installs/erlang/23.2.7/erts-11.1.8/include
+ERTS_CACHE := erts_include
+ERTS_INC := $(shell cat $(ERTS_CACHE))
 
-C_OPTS := -c -fpic -Ic_src/include ${ERTS_INC}
-#C_OPTS  := -c -fpic -Ic_src/include ${ERTS_INC} -DDEBUG -Wall -Wextra -pedantic
-CC_OPTS := -c -fpic -Ic_src/include ${ERTS_INC} -DDEBUG -Wall -Wextra -pedantic
+ifndef ERTS_INC
+# Find the actual ERTS location to include erl_nif.h
+ERTS_INC=$(shell erl -eval 'io:format("~s", [filename:join([code:root_dir(), "erts-" ++ erlang:system_info(version), "include"])])' -noinput -s init stop |tee $(ERTS_CACHE))
+endif
 
+C_OPTS := -c -fpic -Ic_src/include -I${ERTS_INC}
+#C_OPTS  := -c -fpic -Ic_src/include -I${ERTS_INC} -DDEBUG -Wall -Wextra -pedantic
+CC_OPTS := -c -fpic -Ic_src/include -I${ERTS_INC} -DDEBUG -Wall -Wextra -pedantic
 
 L_OPTS := -lstdc++ -shared
 
@@ -85,25 +89,8 @@ eunit:	$(APP) $(APP)_test
 		-eval 'ok = eunit:test(${APP}_tests)' \
 		-s erlang halt
 
-proper: $(APP) $(APP)_test
-	ERL_LIBS=$(ERL_LIBS):~/lib/erl erl -noinput -pa ebin \
-		-s $(APP)_tests start \
-		-s erlang halt
-
-oolong: $(APP) $(APP)_test
-	ERL_LIBS=$(ERL_LIBS):~/lib/erl erl -noinput -pa ebin \
-		-eval 'true = not is_tuple(${APP}_test:start([verbose, {numtests, 10000}]))' \
-		-s erlang halt
-
-measure: $(APP) $(APP)_test
-	erl -noinput -pa ebin \
-		-s $(APP)_test measure \
-		-s erlang halt
-
-test:	clean eunit proper
-
-longtest: clean eunit oolong
+test:	clean eunit
 
 clean:
 	@rm -rf obj ebin doc .eunit
-	@rm -f priv/$(APP).so erl_crash.dump
+	@rm -f priv/$(APP).so erl_crash.dump $(ERTS_CACHE)

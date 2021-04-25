@@ -4,4 +4,4 @@
 /obj
 /priv/*.so
 erl_crash.dump
-
+erts_include
